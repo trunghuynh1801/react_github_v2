@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
-import Form from '@rjsf/core';
-import validator from '@rjsf/validator-ajv8';
-import axios from 'axios'; 
+import React, { useState } from "react";
+import Form from "@rjsf/core";
+import validator from "@rjsf/validator-ajv8";
+import axios from "axios";
+import "./UserLogin.css"; // Import file CSS tùy chỉnh
 
 const schema = {
-  title: 'Đăng ký',
-  type: 'object',
-  required: ['username', 'password'],
+  title: "MỜI NHẬP TÀI KHOẢN",
+  type: "object",
+  required: [
+    "username",
+    "password",
+    "gender",
+    "height",
+    "weight",
+    "medicalHistory",
+  ],
   properties: {
-    username: { type: 'string', title: 'Tài khoản' },
-    password: { type: 'string', title: 'Mật khẩu', format: 'password' },
+    username: { type: "string", title: "TÊN BỆNH NHÂN" },
+    password: { type: "string", title: "MÃ SỐ", format: "password" },
+    gender: { type: "string", title: "GIỚI TÍNH", enum: ["Nam", "Nữ", "Khác"] },
+    height: { type: "number", title: "CHIỀU CAO (cm)" },
+    weight: { type: "number", title: "CÂN NẶNG (kg)" },
+    medicalHistory: {
+      type: "string",
+      title: "TIỀN SỬ BỆNH",
+      format: "textarea",
+    },
   },
 };
 
@@ -18,19 +34,19 @@ const UserLogin = () => {
 
   const handleSubmit = async ({ formData }) => {
     try {
-      console.log('Dữ liệu gửi đi:', formData); // Log dữ liệu trước khi gửi để kiểm tra
+      console.log("Dữ liệu gửi đi:", formData);
 
       const response = await axios.post(
-        'https://ap-southeast-1.aws.data.mongodb-api.com/app/data-oetyj/endpoint/postUserTest',
+        "https://us-east-1.aws.data.mongodb-api.com/app/react_post-agjpx/endpoint/react_post",
         formData
       );
 
-      console.log('Kết quả từ server:', response.data);
+      console.log("Kết quả từ server:", response.data);
 
       // Reset form sau khi submit thành công
       setFormData({});
     } catch (error) {
-      console.error('Lỗi khi gửi dữ liệu:', error);
+      console.error("Lỗi khi gửi dữ liệu:", error);
     }
   };
 
@@ -39,8 +55,8 @@ const UserLogin = () => {
       <Form
         schema={schema}
         validator={validator}
-        formData={formData} // Truyền giá trị của form
-        onChange={({ formData }) => setFormData(formData)} // Cập nhật state khi form thay đổi
+        formData={formData}
+        onChange={({ formData }) => setFormData(formData)}
         onSubmit={handleSubmit}
       />
     </div>
