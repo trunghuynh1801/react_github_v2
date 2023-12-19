@@ -5,7 +5,7 @@ import axios from "axios";
 import "./UserLogin.css"; // Import file CSS tùy chỉnh
 
 const schema = {
-  title: "MỜI NHẬP TÀI KHOẢN",
+  title: "MỜI NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
   type: "object",
   required: [
     "desire",
@@ -17,10 +17,13 @@ const schema = {
   ],
   properties: {
     desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
-    setpoint: { type: "number", title: "Setpoint của hệ thống" },
-    hall: { type: "number", title: "Giá trị từ cảm biến Hall Sensor" },
-    current: { type: "number", title: "CHIỀU CAO (cm)" },
-    LatestBalanceTime: { type: "number", title: "CÂN NẶNG (kg)" },
+    setpoint: { type: "number", title: "Setpoint của hệ thống (0-1024)" },
+    hall: { type: "number", title: "Giá trị từ cảm biến Hall Sensor (0-1024)" },
+    current: { type: "number", title: "Cường độ dòng trong mạch (Ampe)" },
+    LatestBalanceTime: {
+      type: "number",
+      title: "Thời gian gần nhất cân bằng được (giây)",
+    },
     date: { type: "string", title: "Thời gian hiện tại", format: "date-time" },
   },
 };
