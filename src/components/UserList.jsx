@@ -45,25 +45,25 @@ const DataTable = () => {
         <thead>
           <tr>
             <th>STT</th>
-            <th>Number 1</th>
-            <th>Number 2</th>
-            <th>Number 3</th>
-            <th>Number 4</th>
-            <th>Number 5</th>
-            <th>Number 6</th>
-            <th>Ngày</th>
+            <th>Desire</th>
+            <th>Distance</th>
+            <th>Setpoint</th>
+            <th>Hall</th>
+            <th>Current</th>
+            <th>LatestBalanceTime</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{item.number1}</td>
-              <td>{item.number2}</td>
-              <td>{item.number3}</td>
-              <td>{item.number4}</td>
-              <td>{item.number5}</td>
-              <td>{item.number6}</td>
+              <td>{item.desire}</td>
+              <td>{item.distance}</td>
+              <td>{item.setpoint}</td>
+              <td>{item.hall}</td>
+              <td>{item.current}</td>
+              <td>{item.LatestBalanceTime}</td>
               <td>{new Date(item.date).toLocaleDateString()}</td>
             </tr>
           ))}

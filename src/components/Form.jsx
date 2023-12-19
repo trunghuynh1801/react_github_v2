@@ -5,10 +5,11 @@ import axios from "axios";
 import "./UserLogin.css"; // Import file CSS tùy chỉnh
 
 const schema = {
-  title: "MỜI NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
+  title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
   type: "object",
   required: [
     "desire",
+    "distance",
     "setpoint",
     "hall",
     "current",
@@ -17,6 +18,7 @@ const schema = {
   ],
   properties: {
     desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
+    distance: { type: "number", title: "Khoảng hệ thống đo được (mm)" },
     setpoint: { type: "number", title: "Setpoint của hệ thống (0-1024)" },
     hall: { type: "number", title: "Giá trị từ cảm biến Hall Sensor (0-1024)" },
     current: { type: "number", title: "Cường độ dòng trong mạch (Ampe)" },
