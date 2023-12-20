@@ -14,7 +14,7 @@ const schema = {
 };
 
 const TimeDisplay = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [time, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,7 +27,7 @@ const TimeDisplay = () => {
   return (
     <div>
       <p style={{ fontSize: "1.2em" }}>
-        Thời gian hiện tại: {currentTime.toLocaleTimeString()}
+        Thời gian hiện tại: {time.toLocaleTimeString()}
       </p>
     </div>
   );
@@ -40,7 +40,7 @@ const UserLogin = () => {
     try {
       const dataWithTime = {
         ...formData,
-        currentTime: new Date().toISOString(),
+        time: new Date().toISOString(),
       };
 
       console.log("Dữ liệu gửi đi:", formData);
