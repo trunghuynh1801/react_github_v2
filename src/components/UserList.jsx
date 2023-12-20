@@ -1,76 +1,77 @@
 import React, { useState, useEffect } from "react";
+import Form from "@rjsf/core";
+import validator from "@rjsf/validator-ajv8";
 import axios from "axios";
+import "./UserLogin.css"; // Import file CSS tùy chỉnh
 
-const DataTable = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const schema = {
+  title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
+  type: "object",
+  required: ["desire"],
+  properties: {
+    desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
+  },
+};
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "https://us-east-1.aws.data.mongodb-api.com/app/react_get-vbjcf/endpoint/react_get"
-      );
-      setData(response.data);
-      setError(null);
-    } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu:", error);
-      setError("Không thể tải dữ liệu. Vui lòng thử lại sau.");
-    } finally {
-      setLoading(false);
-    }
-  };
+const TimeDisplay = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
 
-  const handleRefresh = () => {
-    setLoading(true);
-    fetchData();
-  };
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div>
-      <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
-      <div style={{ marginBottom: "10px" }}>
-        <button onClick={handleRefresh} disabled={loading}>
-          {loading ? "Refreshing..." : "Refresh"}
-        </button>
-      </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <table
-        style={{ width: "100%", borderCollapse: "collapse", marginTop: "10px" }}
-      >
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Desire</th>
-            <th>Distance</th>
-            <th>Setpoint</th>
-            <th>Hall</th>
-            <th>Current</th>
-            <th>LatestBalanceTime</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.desire}</td>
-              <td>{item.distance}</td>
-              <td>{item.setpoint}</td>
-              <td>{item.hall}</td>
-              <td>{item.current}</td>
-              <td>{item.LatestBalanceTime}</td>
-              <td>{new Date(item.date).toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <p style={{ fontSize: "1.2em" }}>
+        Thời gian hiện tại: {currentTime.toLocaleTimeString()}
+      </p>
     </div>
   );
 };
 
-export default DataTable;
+const UserLogin = () => {
+  const [formData, setFormData] = useState({});
+
+  const handleSubmit = async ({ formData }) => {
+    try {
+      // Thêm thời gian hiện tại vào formData trước khi gửi
+      const dataWithTime = {
+        ...formData,
+        currentTime: new Date().toISOString(),
+      };
+
+      console.log("Dữ liệu gửi đi:", dataWithTime);
+
+      const response = await axios.post(
+        "https://us-east-1.aws.data.mongodb-api.com/app/react_post-agjpx/endpoint/react_post",
+        dataWithTime
+      );
+
+      console.log("Kết quả từ server:", response.data);
+
+      setFormData({});
+    } catch (error) {
+      console.error("Lỗi khi gửi dữ liệu:", error);
+    }
+  };
+
+  return (
+    <div className="auth-form-container">
+      <h2 style={{ fontSize: "1.5em" }}>NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG</h2>
+      <TimeDisplay />
+      <Form
+        schema={schema}
+        validator={validator}
+        formData={formData}
+        onChange={({ formData }) => setFormData(formData)}
+        onSubmit={handleSubmit}
+      />
+    </div>
+  );
+};
+
+export default UserLogin;
