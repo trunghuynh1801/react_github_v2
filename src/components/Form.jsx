@@ -7,27 +7,30 @@ import "./UserLogin.css"; // Import file CSS tùy chỉnh
 const schema = {
   title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
   type: "object",
-  required: [
-    "desire",
-    "distance",
-    "setpoint",
-    "hall",
-    "current",
-    "LatestBalanceTime",
-    "date",
-  ],
+  required: ["desire"],
   properties: {
     desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
-    distance: { type: "number", title: "Khoảng hệ thống đo được (mm)" },
-    setpoint: { type: "number", title: "Setpoint của hệ thống (0-1024)" },
-    hall: { type: "number", title: "Giá trị từ cảm biến Hall Sensor (0-1024)" },
-    current: { type: "number", title: "Cường độ dòng trong mạch (Ampe)" },
-    LatestBalanceTime: {
-      type: "number",
-      title: "Thời gian gần nhất cân bằng được (giây)",
-    },
-    date: { type: "string", title: "Thời gian hiện tại", format: "date-time" },
   },
+};
+
+const TimeDisplay = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <div>
+      <p style={{ fontSize: "1.2em" }}>
+        Thời gian hiện tại: {currentTime.toLocaleTimeString()}
+      </p>
+    </div>
+  );
 };
 
 const UserLogin = () => {
@@ -53,6 +56,8 @@ const UserLogin = () => {
 
   return (
     <div className="auth-form-container">
+      <h2 style={{ fontSize: "1.5em" }}>NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG</h2>
+      <TimeDisplay />
       <Form
         schema={schema}
         validator={validator}
