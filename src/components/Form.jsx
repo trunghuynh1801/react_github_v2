@@ -51,10 +51,10 @@ const UserLogin = () => {
       );
       console.log("Kết quả từ server (update): ", response1.data);
 
-      const response2 = await axios.post(
+      /*const response2 = await axios.post(
         "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/processvalue"
       );
-      console.log("Kết quả từ server (process):", response2.data);
+      console.log("Kết quả từ server (process):", response2.data);*/
 
       // Reset form sau khi submit thành công
       setFormData({});
