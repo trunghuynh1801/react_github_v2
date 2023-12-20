@@ -5,16 +5,16 @@ import axios from "axios";
 import "./UserLogin.css"; // Import file CSS tùy chỉnh
 
 const schema = {
-  title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
+  title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
   type: "object",
   required: ["desire"],
   properties: {
-    desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
+    desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
   },
 };
 
 const TimeDisplay = () => {
-  const [time, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,7 +27,7 @@ const TimeDisplay = () => {
   return (
     <div>
       <p style={{ fontSize: "1.2em" }}>
-        Thời gian hiện tại: {time.toLocaleTimeString()}
+        Thời gian hiện tại: {currentTime.toLocaleTimeString()}
       </p>
     </div>
   );
@@ -38,25 +38,21 @@ const UserLogin = () => {
 
   const handleSubmit = async ({ formData }) => {
     try {
+      // Thêm thời gian hiện tại vào formData trước khi gửi
       const dataWithTime = {
         ...formData,
-        time: new Date().toISOString(),
+        currentTime: new Date().toISOString(),
       };
 
-      console.log("Dữ liệu gửi đi:", formData);
+      console.log("Dữ liệu gửi đi:", dataWithTime);
 
-      const response1 = await axios.post(
+      const response = await axios.post(
         "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/updateinput",
         dataWithTime
       );
-      console.log("Kết quả từ server (update): ", response1.data);
 
-      /*const response2 = await axios.post(
-        "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/processvalue"
-      );
-      console.log("Kết quả từ server (process):", response2.data);*/
+      console.log("Kết quả từ server:", response.data);
 
-      // Reset form sau khi submit thành công
       setFormData({});
     } catch (error) {
       console.error("Lỗi khi gửi dữ liệu:", error);
@@ -65,6 +61,7 @@ const UserLogin = () => {
 
   return (
     <div className="auth-form-container">
+      <h2 style={{ fontSize: "1.5em" }}>NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG</h2>
       <TimeDisplay />
       <Form
         schema={schema}
@@ -73,7 +70,6 @@ const UserLogin = () => {
         onChange={({ formData }) => setFormData(formData)}
         onSubmit={handleSubmit}
       />
-      <TimeDisplay />
     </div>
   );
 };
