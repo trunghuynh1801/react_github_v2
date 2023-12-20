@@ -14,7 +14,7 @@ const schema = {
 };
 
 const TimeDisplay = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [time, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,7 +27,7 @@ const TimeDisplay = () => {
   return (
     <div>
       <p style={{ fontSize: "1.2em" }}>
-        Thời gian hiện tại: {currentTime.toLocaleTimeString()}
+        Thời gian hiện tại: {time.toLocaleTimeString()}
       </p>
     </div>
   );
@@ -38,21 +38,33 @@ const UserLogin = () => {
 
   const handleSubmit = async ({ formData }) => {
     try {
-      // Thêm thời gian hiện tại vào formData trước khi gửi
       const dataWithTime = {
         ...formData,
-        currentTime: new Date().toISOString(),
+        time: new Date().toISOString(),
       };
 
       console.log("Dữ liệu gửi đi:", dataWithTime);
 
-      const response = await axios.post(
+      // Gửi POST request đến endpoint thứ nhất
+      const response1 = await axios.post(
         "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/updateinput",
         dataWithTime
       );
 
-      console.log("Kết quả từ server:", response.data);
+      console.log("Kết quả từ server (endpoint 1):", response1.data);
 
+      // Chờ 2 giây
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Gửi POST request đến endpoint thứ hai
+      const response2 = await axios.post(
+        "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/processvalue",
+        dataWithTime
+      );
+
+      console.log("Kết quả từ server (endpoint 2):", response2.data);
+
+      // Reset form sau khi submit thành công
       setFormData({});
     } catch (error) {
       console.error("Lỗi khi gửi dữ liệu:", error);
@@ -61,8 +73,6 @@ const UserLogin = () => {
 
   return (
     <div className="auth-form-container">
-      <h2 style={{ fontSize: "1.5em" }}>NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG</h2>
-      <TimeDisplay />
       <Form
         schema={schema}
         validator={validator}
@@ -70,6 +80,7 @@ const UserLogin = () => {
         onChange={({ formData }) => setFormData(formData)}
         onSubmit={handleSubmit}
       />
+      <TimeDisplay />
     </div>
   );
 };
