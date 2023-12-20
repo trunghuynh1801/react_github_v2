@@ -38,11 +38,16 @@ const UserLogin = () => {
 
   const handleSubmit = async ({ formData }) => {
     try {
+      const dataWithTime = {
+        ...formData,
+        currentTime: new Date().toISOString(),
+      };
+
       console.log("Dữ liệu gửi đi:", formData);
 
       const response = await axios.post(
         "https://us-east-1.aws.data.mongodb-api.com/app/react_post-agjpx/endpoint/react_post",
-        formData
+        dataWithTime
       );
 
       console.log("Kết quả từ server:", response.data);
@@ -56,8 +61,6 @@ const UserLogin = () => {
 
   return (
     <div className="auth-form-container">
-      <h2 style={{ fontSize: "1.5em" }}>NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG</h2>
-      <TimeDisplay />
       <Form
         schema={schema}
         validator={validator}
@@ -65,6 +68,7 @@ const UserLogin = () => {
         onChange={({ formData }) => setFormData(formData)}
         onSubmit={handleSubmit}
       />
+      <TimeDisplay />
     </div>
   );
 };
