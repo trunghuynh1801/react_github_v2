@@ -45,12 +45,16 @@ const UserLogin = () => {
 
       console.log("Dữ liệu gửi đi:", formData);
 
-      const response = await axios.post(
-        "https://us-east-1.aws.data.mongodb-api.com/app/react_post-agjpx/endpoint/react_post",
+      const response1 = await axios.post(
+        "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/updateinput",
         dataWithTime
       );
+      console.log("Kết quả từ server (update): ", response1.data);
 
-      console.log("Kết quả từ server:", response.data);
+      const response2 = await axios.post(
+        "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/processvalue"
+      );
+      console.log("Kết quả từ server (process):", response2.data);
 
       // Reset form sau khi submit thành công
       setFormData({});
@@ -61,6 +65,7 @@ const UserLogin = () => {
 
   return (
     <div className="auth-form-container">
+      <TimeDisplay />
       <Form
         schema={schema}
         validator={validator}
