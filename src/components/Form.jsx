@@ -14,7 +14,7 @@ const schema = {
 };
 
 const TimeDisplay = () => {
-  const [time, setCurrentTime] = useState(new Date());
+  const [ver, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -40,7 +40,7 @@ const UserLogin = () => {
     try {
       const dataWithTime = {
         ...formData,
-        time: new Date().toISOString(),
+        ver: new Date().toISOString(),
       };
 
       console.log("Dữ liệu gửi đi:", dataWithTime);
