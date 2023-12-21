@@ -47,13 +47,13 @@ const UserLogin = () => {
 
       // Gửi POST request đến endpoint thứ nhất
       const response1 = await axios.post(
-        "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/updateinput",
+        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/update_input",
         dataWithTime
       );
 
       console.log("Kết quả từ server (endpoint 1):", response1.data);
 
-      // Chờ 2 giây
+      /*// Chờ 2 giây
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Gửi POST request đến endpoint thứ hai
@@ -62,7 +62,7 @@ const UserLogin = () => {
         dataWithTime
       );
 
-      console.log("Kết quả từ server (endpoint 2):", response2.data);
+      console.log("Kết quả từ server (endpoint 2):", response2.data);*/
 
       // Reset form sau khi submit thành công
       setFormData({});
