@@ -58,21 +58,11 @@ const UserLogin = () => {
 
       // Gửi POST request đến endpoint thứ hai
       const response2 = await axios.post(
-        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/history",
+        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/getprocess",
         dataWithTime
       );
 
       console.log("Kết quả từ server (endpoint 2):", response2.data);
-
-      // Chờ 2 giây
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      const response3 = await axios.post(
-        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/measure_setpoint",
-        dataWithTime
-      );
-
-      console.log("Kết quả từ server (endpoint 3):", response3.data);
       // Reset form sau khi submit thành công
       setFormData({});
     } catch (error) {
