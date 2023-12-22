@@ -62,7 +62,11 @@ const DataTable = () => {
               <td>{item.public.input.jsonData.distance}</td>
               <td>{item.public.output.jsonData.setpoint}</td>
               <td>{item.public.input.jsonData.hall}</td>
-              <td>{item.public.output.jsonData.current}</td>
+              <td>
+                {item.public.output.jsonData.current !== null
+                  ? item.public.output.jsonData.current
+                  : "N/A"}
+              </td>
               <td>{item.public.input.jsonData.last_balance}</td>
               <td>{item.public.input.jsonInfo.time}</td>
             </tr>
