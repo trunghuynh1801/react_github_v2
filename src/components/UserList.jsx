@@ -9,7 +9,7 @@ const DataTable = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://us-east-1.aws.data.mongodb-api.com/app/react-xvfpd/endpoint/getdata_output"
+        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/getdata_forREACT"
       );
       setData(response.data);
       setError(null);
@@ -58,13 +58,13 @@ const DataTable = () => {
           {data.map((item, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{item.desire}</td>
-              <td>{item.distance}</td>
-              <td>{item.setpoint}</td>
-              <td>{item.hall}</td>
-              <td>{item.current}</td>
-              <td>{item.LatestBalanceTime}</td>
-              <td>{item.time}</td>
+              <td>{item.public.input.jsonData.desire}</td>
+              <td>{item.public.input.jsonData.distance}</td>
+              <td>{item.public.output.jsonData.setpoint}</td>
+              <td>{item.public.input.jsonData.hall}</td>
+              <td>{item.public.output.jsonData.current}</td>
+              <td>{item.public.input.jsonData.last_balance}</td>
+              <td>{item.public.input.jsonInfo.time}</td>
             </tr>
           ))}
         </tbody>
