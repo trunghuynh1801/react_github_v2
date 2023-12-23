@@ -55,12 +55,12 @@ const DataTableFromAPI = () => {
               {data.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{item.public.input.jsonData.desire.$numberInt}</td>
-                  <td>{item.public.input.jsonData.distance.$numberInt}</td>
-                  <td>{item.public.output.jsonData.setpoint.$numberInt}</td>
-                  <td>{item.public.input.jsonData.hall.$numberInt}</td>
-                  <td>{item.public.output.jsonData.current.$numberDouble}</td>
-                  <td>{item.public.input.jsonData.last_balance.$numberInt}</td>
+                  <td>{item.public.input.jsonData.desire}</td>
+                  <td>{item.public.input.jsonData.distance}</td>
+                  <td>{item.public.output.jsonData.setpoint}</td>
+                  <td>{item.public.input.jsonData.hall}</td>
+                  <td>{item.public.output.jsonData.current}</td>
+                  <td>{item.public.input.jsonData.last_balance}</td>
                   <td>{item.public.input.jsonInfo.time}</td>
                 </tr>
               ))}
