@@ -55,18 +55,19 @@ const DataTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.public.input.jsonData.desire}</td>
-              <td>{item.public.input.jsonData.distance}</td>
-              <td>{item.public.output.jsonData.setpoint}</td>
-              <td>{item.public.input.jsonData.hall}</td>
-              <td>{item.public.output.jsonData.current}</td>
-              <td>{item.public.input.jsonData.last_balance}</td>
-              <td>{item.public.input.jsonInfo.time}</td>
-            </tr>
-          ))}
+          {Array.isArray(data) &&
+            data.map((item, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{item.public.input.jsonData.desire}</td>
+                <td>{item.public.input.jsonData.distance}</td>
+                <td>{item.public.output.jsonData.setpoint}</td>
+                <td>{item.public.input.jsonData.hall}</td>
+                <td>{item.public.output.jsonData.current}</td>
+                <td>{item.public.input.jsonData.last_balance}</td>
+                <td>{item.public.input.jsonInfo.time}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
