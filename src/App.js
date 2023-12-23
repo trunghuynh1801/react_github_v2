@@ -7,7 +7,6 @@ function App() {
       <header>
         <h1>Magnetic Levitation</h1>
         <Form />
-        <UserList />
       </header>
     </div>
   );
