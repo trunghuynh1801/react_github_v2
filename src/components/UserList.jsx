@@ -50,7 +50,7 @@ const DataTable = () => {
             <th>Setpoint</th>
             <th>Hall</th>
             <th>Current</th>
-            <th>LatestBalanceTime</th>
+            <th>Last Balance</th>
             <th>Time</th>
           </tr>
         </thead>
