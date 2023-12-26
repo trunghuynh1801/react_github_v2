@@ -47,7 +47,7 @@ const UserLogin = () => {
 
       // Gửi POST request đến endpoint thứ nhất
       const response = await axios.post(
-        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/update_input",
+        "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/update_React",
         dataWithTime
       );
 
