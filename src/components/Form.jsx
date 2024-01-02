@@ -7,9 +7,10 @@ import "./UserLogin.css"; // Import file CSS tùy chỉnh
 const schema = {
   title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
   type: "object",
-  required: ["desire"],
+  required: ["desire", "k_percent"],
   properties: {
     desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
+    percentage: { type: "number", title: "Nhập giá trị phần trăm (K %)" },
   },
 };
 
