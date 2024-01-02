@@ -38,6 +38,7 @@ const DataTableFromAPI = () => {
         <button onClick={handleRefresh} disabled={loading}>
           {loading ? "Refreshing..." : "Refresh"}
         </button>
+        <div style={{ marginRight: "10px" }}></div>
         <DeleteButton />
       </div>
       {loading ? (
