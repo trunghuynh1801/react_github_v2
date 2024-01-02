@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import DeleteButton from "./Delete";
 
 const DataTableFromAPI = () => {
   const [data, setData] = useState([]);
@@ -37,6 +38,7 @@ const DataTableFromAPI = () => {
         <button onClick={handleRefresh} disabled={loading}>
           {loading ? "Refreshing..." : "Refresh"}
         </button>
+        <DeleteButton />
       </div>
       {loading ? (
         <p>Loading...</p>

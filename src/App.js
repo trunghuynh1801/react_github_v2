@@ -1,5 +1,4 @@
 import "./App.css";
-import DeleteButton from "./components/Delete";
 import Form from "./components/Form";
 import UserList from "./components/UserList";
 function App() {
@@ -9,7 +8,6 @@ function App() {
         <h1>Magnetic Levitation</h1>
         <Form />
         <UserList />
-        <DeleteButton />
       </header>
     </div>
   );

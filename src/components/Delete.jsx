@@ -1,7 +1,8 @@
+// DeleteButton.js
 import React, { useState } from "react";
 import axios from "axios";
 
-const DeleteButton = ({ itemId }) => {
+const DeleteButton = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
@@ -13,19 +14,16 @@ const DeleteButton = ({ itemId }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            // Add any additional headers needed for authentication or other purposes
           },
-          // You may need to adjust the data based on the API requirements
-          data: { itemId },
         }
       );
 
       if (response.status === 200) {
         // Handle success, e.g., show a success message, update state, etc.
-        console.log("Item deleted successfully");
+        console.log("Items deleted successfully");
       } else {
         // Handle error, e.g., show an error message, log the error, etc.
-        console.error("Failed to delete item");
+        console.error("Failed to delete items");
       }
     } catch (error) {
       // Handle any unexpected errors
@@ -37,7 +35,7 @@ const DeleteButton = ({ itemId }) => {
 
   return (
     <button onClick={handleDelete} disabled={isDeleting}>
-      {isDeleting ? "Deleting..." : "Delete"}
+      {isDeleting ? "Deleting..." : "Delete All"}
     </button>
   );
 };
