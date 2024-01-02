@@ -35,10 +35,13 @@ const DataTableFromAPI = () => {
     <div>
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
       <div style={{ marginBottom: "10px" }}>
-        <button onClick={handleRefresh} disabled={loading}>
+        <button
+          onClick={handleRefresh}
+          disabled={loading}
+          style={{ marginRight: "10px" }}
+        >
           {loading ? "Refreshing..." : "Refresh"}
         </button>
-        <div style={{ marginRight: "10px" }}></div>
         <DeleteButton />
       </div>
       {loading ? (
