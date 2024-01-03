@@ -1,6 +1,6 @@
 import "./App.css";
 import Form from "./components/Form";
-import UserList from "./components/UserList";
+import UserList from "./components/DataTable";
 function App() {
   return (
     <div className="App">
