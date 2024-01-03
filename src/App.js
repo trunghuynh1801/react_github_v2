@@ -1,8 +1,6 @@
 import "./App.css";
 import Form from "./components/Form";
 import UserList from "./components/UserList";
-import "./DataTable.css";
-import "./UserLogin.css";
 function App() {
   return (
     <div className="App">
