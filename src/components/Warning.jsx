@@ -12,7 +12,7 @@ const WarningSquare = () => {
         const response = await axios.get(
           "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/getdata_forREACT"
         );
-        setWarningData(response.data.public.input.jsonData.warning);
+        setWarningData(response.data.output.jsonData.warning);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
@@ -22,11 +22,11 @@ const WarningSquare = () => {
   }, []);
 
   const getSquareColor = () => {
-    return warningData === 1 ? "red" : "green";
+    return warningData === "false" ? "red" : "green";
   };
 
   const getSquareContent = () => {
-    return warningData === 1 ? "Fail !" : "Fly :) ";
+    return warningData === "false" ? "Fail !" : "Fly :)";
   };
 
   return (
