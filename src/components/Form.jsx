@@ -10,7 +10,7 @@ const schema = {
   required: ["desire", "k_percent"],
   properties: {
     desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
-    percentage: { type: "number", title: "Nhập giá trị phần trăm (K %)" },
+    k_percent: { type: "number", title: "Nhập giá trị phần trăm (K %)" },
   },
 };
 
