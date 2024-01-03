@@ -98,7 +98,10 @@ const DataTableFromAPI = () => {
               {Array.from({ length: Math.ceil(data.length / rowsPerPage) }).map(
                 (item, index) => (
                   <li key={index}>
-                    <button onClick={() => paginate(index + 1)}>
+                    <button
+                      onClick={() => paginate(index + 1)}
+                      className={currentPage === index + 1 ? "active" : ""}
+                    >
                       {index + 1}
                     </button>
                   </li>
