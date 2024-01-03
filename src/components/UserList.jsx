@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteButton from "./Delete";
+import "./DataTable.css";
 
 const DataTableFromAPI = () => {
   const [data, setData] = useState([]);
