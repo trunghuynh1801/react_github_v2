@@ -64,7 +64,7 @@ const DataTableFromAPI = () => {
   }
 
   return (
-    <div>
+    <div className="table-container">
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
       <div style={{ marginBottom: "10px" }}>
         <button
