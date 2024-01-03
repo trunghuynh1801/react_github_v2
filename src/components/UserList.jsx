@@ -42,6 +42,27 @@ const DataTableFromAPI = () => {
     setCurrentPage(pageNumber);
   };
 
+  const lastPage = Math.ceil(data.length / rowsPerPage);
+  const paginationRange = 5; // Số lượng trang hiển thị
+
+  let startPage, endPage;
+  if (lastPage <= paginationRange) {
+    startPage = 1;
+    endPage = lastPage;
+  } else {
+    const halfRange = Math.floor(paginationRange / 2);
+    if (currentPage <= halfRange) {
+      startPage = 1;
+      endPage = paginationRange;
+    } else if (currentPage + halfRange >= lastPage) {
+      startPage = lastPage - paginationRange + 1;
+      endPage = lastPage;
+    } else {
+      startPage = currentPage - halfRange;
+      endPage = currentPage + halfRange;
+    }
+  }
+
   return (
     <div>
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
@@ -95,14 +116,16 @@ const DataTableFromAPI = () => {
           </table>
           <div>
             <ul className="pagination">
-              {Array.from({ length: Math.ceil(data.length / rowsPerPage) }).map(
+              {Array.from({ length: endPage - startPage + 1 }).map(
                 (item, index) => (
                   <li key={index}>
                     <button
-                      onClick={() => paginate(index + 1)}
-                      className={currentPage === index + 1 ? "active" : ""}
+                      onClick={() => paginate(startPage + index)}
+                      className={
+                        currentPage === startPage + index ? "active" : ""
+                      }
                     >
-                      {index + 1}
+                      {startPage + index}
                     </button>
                   </li>
                 )
