@@ -4,7 +4,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #df1818;
   margin: 20px auto;
   max-width: 800px;
   transition: box-shadow 0.3s ease; /* Thêm transition để làm mịn hiệu ứng shadow */
