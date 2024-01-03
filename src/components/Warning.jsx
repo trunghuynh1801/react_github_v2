@@ -10,9 +10,9 @@ const WarningSquare = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/getdata_forREACT"
+          "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/REACT_GetWarning"
         );
-        setWarningData(response.data.output.jsonData.warning);
+        setWarningData(response.data);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
