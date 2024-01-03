@@ -29,7 +29,7 @@
 
 .table-container th {
   background-color: #61dafb; /* Màu mới cho tiêu đề */
-  color: #000000; /* Màu chữ cho tiêu đề */
+  color: #fff; /* Màu chữ cho tiêu đề */
   font-weight: bold;
 }
 
