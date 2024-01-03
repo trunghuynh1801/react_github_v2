@@ -22,11 +22,11 @@ const WarningSquare = () => {
   }, []);
 
   const getSquareColor = () => {
-    return warningData === "false" ? "red" : "green";
+    return warningData === "1" ? "red" : "green";
   };
 
   const getSquareContent = () => {
-    return warningData === "false" ? "Fail !" : "Fly :)";
+    return warningData === "1" ? "Fail !" : "Fly :)";
   };
 
   return (
