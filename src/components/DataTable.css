@@ -7,6 +7,11 @@
   background-color: #fff;
   margin: 20px auto;
   max-width: 800px;
+  transition: box-shadow 0.3s ease; /* Thêm transition để làm mịn hiệu ứng shadow */
+}
+
+.table-container:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Hiệu ứng shadow khi hover */
 }
 
 .table-container table {
@@ -23,7 +28,8 @@
 }
 
 .table-container th {
-  background-color: #f2f2f2;
+  background-color: #61dafb; /* Màu mới cho tiêu đề */
+  color: #000000; /* Màu chữ cho tiêu đề */
   font-weight: bold;
 }
 
