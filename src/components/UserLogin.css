@@ -15,7 +15,7 @@ input[type="number"], /* Thêm type="number" cho input số */
 input[type="text"],
 select,
 textarea {
-  width: 100%;
+  width: 50%;
   padding: 15px;
   margin-bottom: 20px;
   font-size: 18px; /* Giảm kích thước chữ về 18px */
