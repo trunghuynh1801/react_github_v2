@@ -11,7 +11,7 @@
 }
 
 /* Điều chỉnh kích thước chữ và căn chỉnh cho các trường input */
-input[type="number"], /* Thêm type="number" cho input số */
+input[type="number"],
 input[type="text"],
 select,
 textarea {
@@ -20,6 +20,8 @@ textarea {
   margin-bottom: 20px;
   font-size: 18px; /* Giảm kích thước chữ về 18px */
   box-sizing: border-box;
+  border: 1px solid #ccc; /* Thêm viền 1px và màu sắc cho input */
+  border-radius: 4px; /* Bo tròn góc của input */
 }
 
 /* Điều chỉnh kích thước chữ cho tiêu đề của các trường */
