@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const WarningSquare = () => {
-  const [warningData, setWarningData] = useState([]);
+  const [warningData, setWarningData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,7 +12,14 @@ const WarningSquare = () => {
         const response = await axios.get(
           "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/REACT_GetWarning"
         );
-        setWarningData(response.data);
+
+        // Assume the structure of the response is an array of documents
+        const documents = response.data;
+
+        // Access the "public.output.warning" property from the first document (you may need to adjust this based on your actual data structure)
+        const firstDocumentWarning = documents[0]?.public?.output?.warning;
+
+        setWarningData(firstDocumentWarning);
         console.log(warningData);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
