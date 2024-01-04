@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const WarningSquare = () => {
-  const [warningData, setWarningData] = useState(null);
+  const [warningData, setWarningData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
