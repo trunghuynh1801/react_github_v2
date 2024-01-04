@@ -25,7 +25,13 @@ const WarningSquare = () => {
       }
     };
 
-    fetchData();
+    const intervalId = setInterval(() => {
+      // Gửi request mỗi giây
+      fetchData();
+    }, 1000);
+
+    // Dùng clearInterval để tránh memory leak khi component unmount
+    return () => clearInterval(intervalId);
   }, []); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
 
   const getSquareColor = () => {
