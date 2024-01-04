@@ -19,23 +19,24 @@ const WarningSquare = () => {
           documents[0].public.output.jsonData.warning;
 
         setWarningData(firstDocumentWarning);
-        console.log(firstDocumentWarning);
-        console.log(warningData);
+        console.log("First Document Warning:", firstDocumentWarning);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, []); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
 
   const getSquareColor = () => {
-    return firstDocumentWarning === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
+    return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
   };
 
   const getSquareContent = () => {
-    return firstDocumentWarning === 1 ? "Fail !" : "Fly :)";
+    return warningData === 1 ? "Fail !" : "Fly :)";
   };
+
+  console.log("Current Warning Data:", warningData);
 
   return (
     <div
