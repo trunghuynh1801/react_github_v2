@@ -17,7 +17,8 @@ const WarningSquare = () => {
         const documents = response.data;
 
         // Access the "public.output.warning" property from the first document (you may need to adjust this based on your actual data structure)
-        const firstDocumentWarning = documents[0].public.output.warning;
+        const firstDocumentWarning =
+          documents[0].public.output.jsonData.warning;
 
         setWarningData(firstDocumentWarning);
         console.log(firstDocumentWarning);
