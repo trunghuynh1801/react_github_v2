@@ -1,8 +1,3 @@
-// WarningSquare.js
-
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
 const WarningSquare = () => {
   const [warningData, setWarningData] = useState(null);
 
@@ -22,6 +17,7 @@ const WarningSquare = () => {
 
         setWarningData(firstDocumentWarning);
         console.log(firstDocumentWarning);
+        console.log(warningData);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
@@ -31,11 +27,11 @@ const WarningSquare = () => {
   }, []);
 
   const getSquareColor = () => {
-    return warningData === "1" ? "red" : "green";
+    return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
   };
 
   const getSquareContent = () => {
-    return warningData === "1" ? "Fail !" : "Fly :)";
+    return warningData === 1 ? "Fail !" : "Fly :)";
   };
 
   return (
