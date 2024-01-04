@@ -30,11 +30,11 @@ const WarningSquare = () => {
   }, []);
 
   const getSquareColor = () => {
-    return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
+    return firstDocumentWarning === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
   };
 
   const getSquareContent = () => {
-    return warningData === 1 ? "Fail !" : "Fly :)";
+    return firstDocumentWarning === 1 ? "Fail !" : "Fly :)";
   };
 
   return (
