@@ -13,6 +13,7 @@ const WarningSquare = () => {
           "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/REACT_GetWarning"
         );
         setWarningData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
