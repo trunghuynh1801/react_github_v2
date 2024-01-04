@@ -20,7 +20,7 @@ const WarningSquare = () => {
         const firstDocumentWarning = documents[0]?.public?.output?.warning;
 
         setWarningData(firstDocumentWarning);
-        console.log(warningData);
+        console.log(firstDocumentWarning);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
