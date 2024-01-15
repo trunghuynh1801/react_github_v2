@@ -69,9 +69,6 @@ const DataTableFromAPI = () => {
     <div className="table-container">
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
       <div style={{ marginBottom: "10px" }}>
-        <button onClick={toggleSwitch}>
-          {switchOn ? "Turn Off" : "Turn On"}
-        </button>
         <button
           onClick={handleRefresh}
           disabled={loading}
