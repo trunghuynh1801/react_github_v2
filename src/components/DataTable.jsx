@@ -10,7 +10,7 @@ const DataTableFromAPI = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
-  const { switchOn } = useData(); // Sử dụng Context
+  const { switchOn, toggleSwitch } = useData();
 
   const fetchData = async () => {
     try {
@@ -69,6 +69,9 @@ const DataTableFromAPI = () => {
     <div className="table-container">
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
       <div style={{ marginBottom: "10px" }}>
+        <button onClick={toggleSwitch}>
+          {switchOn ? "Turn Off" : "Turn On"}
+        </button>
         <button
           onClick={handleRefresh}
           disabled={loading}

@@ -4,7 +4,7 @@ import { useData } from "./DataContext";
 
 const WarningSquare = () => {
   const [warningData, setWarningData] = useState(null);
-  const { switchOn } = useData(); // Sử dụng Context
+  const { switchOn, toggleSwitch } = useData(); // Sử dụng Context
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,20 +43,25 @@ const WarningSquare = () => {
   console.log("Current Warning Data:", warningData);
 
   return (
-    <div
-      style={{
-        width: "100px",
-        height: "100px",
-        backgroundColor: getSquareColor(),
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "white",
-        fontWeight: "bold",
-        fontSize: "18px",
-      }}
-    >
-      {getSquareContent()}
+    <div>
+      <div
+        style={{
+          width: "100px",
+          height: "100px",
+          backgroundColor: getSquareColor(),
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "white",
+          fontWeight: "bold",
+          fontSize: "18px",
+        }}
+      >
+        {getSquareContent()}
+      </div>
+      <button onClick={toggleSwitch}>
+        {switchOn ? "Turn Off" : "Turn On"}
+      </button>
     </div>
   );
 };
