@@ -5,7 +5,7 @@ const DataContext = createContext();
 export const useData = () => useContext(DataContext);
 
 export const DataProvider = ({ children }) => {
-  const [switchOn, setSwitchOn] = useState(false);
+  const [switchOn, setSwitchOn] = useState(true);
 
   useEffect(() => {
     let intervalId;
@@ -14,6 +14,7 @@ export const DataProvider = ({ children }) => {
       intervalId = setInterval(() => {
         // Gọi fetchData mỗi 2 giây khi công tắc được bật
         // Thực hiện logic fetchData ở đây
+        console.log("Fetching data...");
       }, 2000);
     }
 
@@ -23,6 +24,10 @@ export const DataProvider = ({ children }) => {
   const toggleSwitch = () => {
     setSwitchOn(!switchOn);
   };
+
+  useEffect(() => {
+    toggleSwitch();
+  }, []);
 
   return (
     <DataContext.Provider value={{ switchOn, toggleSwitch }}>
