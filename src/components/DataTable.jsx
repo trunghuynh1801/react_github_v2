@@ -9,6 +9,7 @@ const DataTableFromAPI = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
+  const [refreshToggle, setRefreshToggle] = useState(false); // Công tắc refresh
 
   const fetchData = async () => {
     try {
@@ -26,12 +27,21 @@ const DataTableFromAPI = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const intervalId = setInterval(() => {
+      // Gọi fetchData mỗi giây khi refreshToggle thay đổi
+      fetchData();
+    }, 1000);
+
+    return () => {
+      // Dọn dẹp interval khi component bị hủy
+      clearInterval(intervalId);
+    };
+  }, [refreshToggle]);
 
   const handleRefresh = () => {
     setLoading(true);
-    fetchData();
+    // Bật công tắc để gọi fetchData
+    setRefreshToggle((prevToggle) => !prevToggle);
   };
 
   const indexOfLastRow = currentPage * rowsPerPage;

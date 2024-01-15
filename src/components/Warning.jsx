@@ -3,6 +3,7 @@ import axios from "axios";
 
 const WarningSquare = () => {
   const [warningData, setWarningData] = useState(null);
+  const [refreshToggle, setRefreshToggle] = useState(false); // Công tắc refresh
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,10 +12,7 @@ const WarningSquare = () => {
           "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/REACT_GetWarning"
         );
 
-        // Assume the structure of the response is an array of documents
         const documents = response.data;
-
-        // Access the "public.output.warning" property from the first document (you may need to adjust this based on your actual data structure)
         const firstDocumentWarning =
           documents[0].public.output.jsonData.warning;
 
@@ -25,14 +23,15 @@ const WarningSquare = () => {
       }
     };
 
+    // Gọi fetchData mỗi giây khi refreshToggle thay đổi
     const intervalId = setInterval(() => {
-      // Gửi request mỗi giây
       fetchData();
     }, 1000);
 
-    // Dùng clearInterval để tránh memory leak khi component unmount
-    return () => clearInterval(intervalId);
-  }, []); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refreshToggle]); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
 
   const getSquareColor = () => {
     return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
