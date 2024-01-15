@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteButton from "./Delete";
 import "./DataTable.css";
+import { useData } from "./DataContext";
 
 const DataTableFromAPI = () => {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ const DataTableFromAPI = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
-  const [isRefreshing, setIsRefreshing] = useState(false); // Sử dụng state để kiểm soát công tắc
+  const { switchOn } = useData(); // Sử dụng Context
 
   const fetchData = async () => {
     try {
@@ -23,28 +24,16 @@ const DataTableFromAPI = () => {
       setError("Không thể tải dữ liệu. Vui lòng thử lại sau.");
     } finally {
       setLoading(false);
-      // Khi dữ liệu được fetch xong, tắt công tắc refresh
-      setIsRefreshing(false);
     }
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      // Gọi fetchData mỗi giây khi isRefreshing là true
-      if (isRefreshing) {
-        fetchData();
-      }
-    }, 1000);
+    fetchData();
+  }, [switchOn]);
 
-    return () => {
-      // Dọn dẹp interval khi component bị hủy
-      clearInterval(intervalId);
-    };
-  }, [isRefreshing]);
-
-  const handleToggleRefresh = () => {
-    // Bật hoặc tắt công tắc refresh khi nút được nhấn
-    setIsRefreshing((prevToggle) => !prevToggle);
+  const handleRefresh = () => {
+    setLoading(true);
+    fetchData();
   };
 
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -81,11 +70,11 @@ const DataTableFromAPI = () => {
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
       <div style={{ marginBottom: "10px" }}>
         <button
-          onClick={handleToggleRefresh}
+          onClick={handleRefresh}
           disabled={loading}
           style={{ marginRight: "10px" }}
         >
-          {isRefreshing ? "Stop Refreshing" : "Start Refreshing"}
+          {loading ? "Refreshing..." : "Refresh"}
         </button>
         <DeleteButton />
       </div>

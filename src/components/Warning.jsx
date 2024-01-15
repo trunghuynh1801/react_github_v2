@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useData } from "./DataContext";
 
 const WarningSquare = () => {
   const [warningData, setWarningData] = useState(null);
-  const [refreshToggle, setRefreshToggle] = useState(false); // Công tắc refresh
+  const { switchOn } = useData(); // Sử dụng Context
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,7 +13,10 @@ const WarningSquare = () => {
           "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/REACT_GetWarning"
         );
 
+        // Assume the structure of the response is an array of documents
         const documents = response.data;
+
+        // Access the "public.output.warning" property from the first document (you may need to adjust this based on your actual data structure)
         const firstDocumentWarning =
           documents[0].public.output.jsonData.warning;
 
@@ -23,15 +27,10 @@ const WarningSquare = () => {
       }
     };
 
-    // Gọi fetchData mỗi giây khi refreshToggle thay đổi
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 1000);
+    fetchData();
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [refreshToggle]); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
+    // Thêm switchOn vào dependency array để useEffect chạy lại khi switchOn thay đổi
+  }, [switchOn]);
 
   const getSquareColor = () => {
     return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
