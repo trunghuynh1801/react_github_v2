@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DeleteButton from "./Delete";
 import "./DataTable.css";
-import { useData } from "./DataContext";
 
 const DataTableFromAPI = () => {
   const [data, setData] = useState([]);
@@ -10,7 +9,6 @@ const DataTableFromAPI = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
-  const { switchOn, toggleSwitch } = useData();
 
   const fetchData = async () => {
     try {
@@ -29,7 +27,7 @@ const DataTableFromAPI = () => {
 
   useEffect(() => {
     fetchData();
-  }, [switchOn]);
+  }, []);
 
   const handleRefresh = () => {
     setLoading(true);

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useData } from "./DataContext";
 
 const WarningSquare = () => {
   const [warningData, setWarningData] = useState(null);
-  const { switchOn, toggleSwitch } = useData(); // Sử dụng Context
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +25,14 @@ const WarningSquare = () => {
       }
     };
 
-    fetchData();
+    const intervalId = setInterval(() => {
+      // Gửi request mỗi giây
+      fetchData();
+    }, 1000);
 
-    // Thêm switchOn vào dependency array để useEffect chạy lại khi switchOn thay đổi
-  }, [switchOn]);
+    // Dùng clearInterval để tránh memory leak khi component unmount
+    return () => clearInterval(intervalId);
+  }, []); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
 
   const getSquareColor = () => {
     return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
@@ -43,25 +45,20 @@ const WarningSquare = () => {
   console.log("Current Warning Data:", warningData);
 
   return (
-    <div>
-      <div
-        style={{
-          width: "100px",
-          height: "100px",
-          backgroundColor: getSquareColor(),
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "white",
-          fontWeight: "bold",
-          fontSize: "18px",
-        }}
-      >
-        {getSquareContent()}
-      </div>
-      <button onClick={toggleSwitch}>
-        {switchOn ? "Turn Off" : "Turn On"}
-      </button>
+    <div
+      style={{
+        width: "100px",
+        height: "100px",
+        backgroundColor: getSquareColor(),
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "white",
+        fontWeight: "bold",
+        fontSize: "18px",
+      }}
+    >
+      {getSquareContent()}
     </div>
   );
 };
