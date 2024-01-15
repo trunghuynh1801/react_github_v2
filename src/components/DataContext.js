@@ -1,21 +1,19 @@
+import React, { createContext, useContext, useState, useEffect } from "react";
+
+const DataContext = createContext();
+
+export const useData = () => useContext(DataContext);
+
 export const DataProvider = ({ children }) => {
   const [switchOn, setSwitchOn] = useState(false);
-
-  const fetchData = async () => {
-    try {
-      // Thực hiện logic fetchData ở đây
-      console.log("Fetching data...");
-    } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu:", error);
-    }
-  };
 
   useEffect(() => {
     let intervalId;
 
     if (switchOn) {
       intervalId = setInterval(() => {
-        fetchData();
+        // Gọi fetchData mỗi 2 giây khi công tắc được bật
+        // Thực hiện logic fetchData ở đây
       }, 2000);
     }
 
