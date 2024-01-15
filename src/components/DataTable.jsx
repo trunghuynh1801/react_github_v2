@@ -9,7 +9,7 @@ const DataTableFromAPI = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
-  const [refreshToggle, setRefreshToggle] = useState(false); // Công tắc refresh
+  const [isRefreshing, setIsRefreshing] = useState(false); // Sử dụng state để kiểm soát công tắc
 
   const fetchData = async () => {
     try {
@@ -23,25 +23,28 @@ const DataTableFromAPI = () => {
       setError("Không thể tải dữ liệu. Vui lòng thử lại sau.");
     } finally {
       setLoading(false);
+      // Khi dữ liệu được fetch xong, tắt công tắc refresh
+      setIsRefreshing(false);
     }
   };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      // Gọi fetchData mỗi giây khi refreshToggle thay đổi
-      fetchData();
+      // Gọi fetchData mỗi giây khi isRefreshing là true
+      if (isRefreshing) {
+        fetchData();
+      }
     }, 1000);
 
     return () => {
       // Dọn dẹp interval khi component bị hủy
       clearInterval(intervalId);
     };
-  }, [refreshToggle]);
+  }, [isRefreshing]);
 
-  const handleRefresh = () => {
-    setLoading(true);
-    // Bật công tắc để gọi fetchData
-    setRefreshToggle((prevToggle) => !prevToggle);
+  const handleToggleRefresh = () => {
+    // Bật hoặc tắt công tắc refresh khi nút được nhấn
+    setIsRefreshing((prevToggle) => !prevToggle);
   };
 
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -78,11 +81,11 @@ const DataTableFromAPI = () => {
       <h2 style={{ fontSize: "1.5em" }}>DANH SÁCH DỮ LIỆU</h2>
       <div style={{ marginBottom: "10px" }}>
         <button
-          onClick={handleRefresh}
+          onClick={handleToggleRefresh}
           disabled={loading}
           style={{ marginRight: "10px" }}
         >
-          {loading ? "Refreshing..." : "Refresh"}
+          {isRefreshing ? "Stop Refreshing" : "Start Refreshing"}
         </button>
         <DeleteButton />
       </div>
