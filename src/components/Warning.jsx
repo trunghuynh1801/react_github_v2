@@ -58,13 +58,13 @@ const WarningSquare = () => {
     >
       {getSquareContent()}
       <br />
-      <label>
+      <label style={{ fontSize: "14px" }}>
         <input
           type="checkbox"
           checked={isFetching}
           onChange={() => setIsFetching(!isFetching)}
         />
-        Fetch Data
+        Kiểm tra hoạt động
       </label>
     </div>
   );
