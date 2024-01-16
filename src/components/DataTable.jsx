@@ -11,6 +11,19 @@ const DataTableFromAPI = () => {
   const [rowsPerPage] = useState(10);
   const [sortOrder, setSortOrder] = useState({ field: null, ascending: true });
 
+  const handleDownload = (rowData) => {
+    const jsonData = JSON.stringify(rowData);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -156,6 +169,11 @@ const DataTableFromAPI = () => {
                   <td>{item.public.output.jsonData.current}</td>
                   <td>{item.public.input.jsonData.last_balance}</td>
                   <td>{item.public.input.jsonInfo.time}</td>
+                  <td>
+                    <button onClick={() => handleDownload(item)}>
+                      Download
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
