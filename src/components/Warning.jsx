@@ -45,7 +45,7 @@ const WarningSquare = () => {
   return (
     <div
       style={{
-        width: "100px",
+        width: "auto",
         height: "100px",
         backgroundColor: getSquareColor(),
         display: "flex",
