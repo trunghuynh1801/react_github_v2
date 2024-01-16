@@ -6,12 +6,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   margin: 20px auto;
-  max-width: 1000px; /* Đặt giá trị tăng độ rộng của bảng */
-  transition: box-shadow 0.3s ease;
+  max-width: 900px;
+  transition: box-shadow 0.3s ease; /* Thêm transition để làm mịn hiệu ứng shadow */
 }
 
 .table-container:hover {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Hiệu ứng shadow khi hover */
 }
 
 .table-container table {
@@ -28,20 +28,26 @@
 }
 
 .table-container th {
-  background-color: #61dafb;
-  color: #fff;
+  background-color: #61dafb; /* Màu mới cho tiêu đề */
+  color: #fff; /* Màu chữ cho tiêu đề */
   font-weight: bold;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .pagination button {
   background-color: #61dafb;
   color: #fff;
-  padding: 6px 10px; /* Giảm kích thước của nút */
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 12px; /* Giảm kích thước chữ của nút */
-  margin: 0 3px; /* Giảm khoảng cách giữa các nút */
+  font-size: 14px;
+  margin: 0 5px;
 }
 
 .pagination button:hover {
@@ -77,17 +83,17 @@
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 3px; /* Giảm khoảng cách giữa các nút phân trang */
+  gap: 5px;
 }
 
 .pagination button {
   background-color: #61dafb;
   color: #fff;
-  padding: 6px 10px; /* Giảm kích thước của nút */
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 12px; /* Giảm kích thước chữ của nút */
+  font-size: 14px;
 }
 
 .pagination button:hover {
