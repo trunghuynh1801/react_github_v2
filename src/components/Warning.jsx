@@ -37,7 +37,7 @@ const WarningSquare = () => {
   };
 
   const getSquareContent = () => {
-    return warningData === 1 ? "Fail !" : "Fly :)";
+    return warningData === 1 ? "Rớt Rồi !" : "Đang Bay :)";
   };
 
   console.log("Current Warning Data:", warningData);
@@ -53,7 +53,7 @@ const WarningSquare = () => {
         justifyContent: "center",
         color: "white",
         fontWeight: "bold",
-        fontSize: "18px",
+        fontSize: "30px",
       }}
     >
       {getSquareContent()}
