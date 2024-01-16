@@ -9,6 +9,7 @@ const DataTableFromAPI = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
+  const [sortOrder, setSortOrder] = useState({ field: null, ascending: true });
 
   const fetchData = async () => {
     try {
@@ -43,7 +44,7 @@ const DataTableFromAPI = () => {
   };
 
   const lastPage = Math.ceil(data.length / rowsPerPage);
-  const paginationRange = 5; // Số lượng trang hiển thị
+  const paginationRange = 5;
 
   let startPage, endPage;
   if (lastPage <= paginationRange) {
@@ -62,6 +63,27 @@ const DataTableFromAPI = () => {
       endPage = currentPage + halfRange;
     }
   }
+
+  const handleSort = (field) => {
+    setSortOrder((prevSortOrder) => ({
+      field,
+      ascending:
+        prevSortOrder.field === field ? !prevSortOrder.ascending : true,
+    }));
+  };
+
+  const sortedRows = currentRows.sort((a, b) => {
+    const fieldA = a.public.input.jsonData[sortOrder.field];
+    const fieldB = b.public.input.jsonData[sortOrder.field];
+
+    if (fieldA < fieldB) {
+      return sortOrder.ascending ? -1 : 1;
+    }
+    if (fieldA > fieldB) {
+      return sortOrder.ascending ? 1 : -1;
+    }
+    return 0;
+  });
 
   return (
     <div className="table-container">
@@ -89,18 +111,42 @@ const DataTableFromAPI = () => {
           >
             <thead>
               <tr>
-                <th>STT</th>
-                <th>Desire</th>
-                <th>Distance</th>
-                <th>Setpoint</th>
-                <th>Hall</th>
-                <th>Current</th>
-                <th>Last Balance</th>
-                <th>Time</th>
+                <th>
+                  STT
+                  <button onClick={() => handleSort("index")}>▲▼</button>
+                </th>
+                <th>
+                  Desire
+                  <button onClick={() => handleSort("desire")}>▲▼</button>
+                </th>
+                <th>
+                  Distance
+                  <button onClick={() => handleSort("distance")}>▲▼</button>
+                </th>
+                <th>
+                  Setpoint
+                  <button onClick={() => handleSort("setpoint")}>▲▼</button>
+                </th>
+                <th>
+                  Hall
+                  <button onClick={() => handleSort("hall")}>▲▼</button>
+                </th>
+                <th>
+                  Current
+                  <button onClick={() => handleSort("current")}>▲▼</button>
+                </th>
+                <th>
+                  Last Balance
+                  <button onClick={() => handleSort("last_balance")}>▲▼</button>
+                </th>
+                <th>
+                  Time
+                  <button onClick={() => handleSort("time")}>▲▼</button>
+                </th>
               </tr>
             </thead>
             <tbody>
-              {currentRows.map((item, index) => (
+              {sortedRows.map((item, index) => (
                 <tr key={index}>
                   <td>{index + 1 + indexOfFirstRow}</td>
                   <td>{item.public.input.jsonData.desire}</td>
