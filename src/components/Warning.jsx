@@ -46,9 +46,10 @@ const WarningSquare = () => {
     <div
       style={{
         width: "auto",
-        height: "auto",
+        height: "100px",
         backgroundColor: getSquareColor(),
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
@@ -57,14 +58,13 @@ const WarningSquare = () => {
       }}
     >
       {getSquareContent()}
-      <br />
       <label style={{ fontSize: "14px" }}>
         <input
           type="checkbox"
           checked={isFetching}
           onChange={() => setIsFetching(!isFetching)}
         />
-        Kiểm tra hoạt động
+        Kiểm tra hoạt động
       </label>
     </div>
   );
