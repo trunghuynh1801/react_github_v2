@@ -3,6 +3,7 @@ import axios from "axios";
 
 const WarningSquare = () => {
   const [warningData, setWarningData] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,12 +12,9 @@ const WarningSquare = () => {
           "https://us-east-1.aws.data.mongodb-api.com/app/agg_func-voayj/endpoint/REACT_GetWarning"
         );
 
-        // Assume the structure of the response is an array of documents
         const documents = response.data;
-
-        // Access the "public.output.warning" property from the first document (you may need to adjust this based on your actual data structure)
         const firstDocumentWarning =
-          documents[0].public.output.jsonData.warning;
+          documents[0]?.public?.output?.jsonData?.warning;
 
         setWarningData(firstDocumentWarning);
         console.log("First Document Warning:", firstDocumentWarning);
@@ -26,20 +24,20 @@ const WarningSquare = () => {
     };
 
     const intervalId = setInterval(() => {
-      // Gửi request mỗi giây
-      fetchData();
-    }, 1000);
+      if (isFetching) {
+        fetchData();
+      }
+    }, 2000); // Fetch mỗi 2 giây
 
-    // Dùng clearInterval để tránh memory leak khi component unmount
     return () => clearInterval(intervalId);
-  }, []); // Rỗng để đảm bảo useEffect chỉ chạy một lần sau khi render đầu tiên
+  }, [isFetching]);
 
   const getSquareColor = () => {
-    return warningData === 1 ? "red" : "green"; // So sánh với số thay vì chuỗi
+    return warningData === 1 ? "red" : "green";
   };
 
   const getSquareContent = () => {
-    return warningData === 1 ? "Fail !" : "Fly :)";
+    return warningData === 1 ? "Rớt Rồi !" : "Đang Bay :)";
   };
 
   console.log("Current Warning Data:", warningData);
@@ -47,18 +45,27 @@ const WarningSquare = () => {
   return (
     <div
       style={{
-        width: "100px",
+        width: "auto",
         height: "100px",
         backgroundColor: getSquareColor(),
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
         fontWeight: "bold",
-        fontSize: "18px",
+        fontSize: "30px",
       }}
     >
       {getSquareContent()}
+      <label style={{ fontSize: "14px" }}>
+        <input
+          type="checkbox"
+          checked={isFetching}
+          onChange={() => setIsFetching(!isFetching)}
+        />
+        Kiểm tra hoạt động
+      </label>
     </div>
   );
 };
