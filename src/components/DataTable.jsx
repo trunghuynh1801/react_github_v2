@@ -26,15 +26,17 @@ const DataTableFromAPI = () => {
 
   const formatTime = (timeString) => {
     const options = {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
       hour12: false, // Use 24-hour clock format
     };
-    return new Intl.DateTimeFormat('en-US', options).format(new Date(timeString));
+    return new Intl.DateTimeFormat("en-US", options).format(
+      new Date(timeString)
+    );
   };
 
   const fetchData = async () => {
@@ -169,7 +171,6 @@ const DataTableFromAPI = () => {
                   Time
                   <button onClick={() => handleSort("time")}>▲▼</button>
                 </th>
-
               </tr>
             </thead>
             <tbody>
