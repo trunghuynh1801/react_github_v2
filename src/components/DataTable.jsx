@@ -24,6 +24,19 @@ const DataTableFromAPI = () => {
     URL.revokeObjectURL(url);
   };
 
+  const formatTime = (timeString) => {
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false, // Use 24-hour clock format
+    };
+    return new Intl.DateTimeFormat('en-US', options).format(new Date(timeString));
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -156,6 +169,7 @@ const DataTableFromAPI = () => {
                   Time
                   <button onClick={() => handleSort("time")}>▲▼</button>
                 </th>
+
               </tr>
             </thead>
             <tbody>
@@ -168,7 +182,9 @@ const DataTableFromAPI = () => {
                   <td>{item.public.input.jsonData.hall}</td>
                   <td>{item.public.output.jsonData.current}</td>
                   <td>{item.public.input.jsonData.last_balance}</td>
-                  <td>{item.public.input.jsonInfo.time}</td>
+
+                  {/* <td>{item.public.input.jsonInfo.time}</td> */}
+                  <td>{formatTime(item.public.input.jsonInfo.time)}</td>
                   <td>
                     <button onClick={() => handleDownload(item)}>
                       Download
