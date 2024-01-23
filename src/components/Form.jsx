@@ -7,10 +7,16 @@ import "./NhapData.css"; // Import file CSS tùy chỉnh
 const schema = {
   title: "NHẬP THÔNG TIN ĐIỀU KHIỂN HỆ THỐNG",
   type: "object",
-  required: ["desire", "k_percent"],
+  required: ["desire"],
   properties: {
     desire: { type: "number", title: "Nhập khoảng cách mong muốn (mm)" },
     k_percent: { type: "number", title: "Nhập giá trị phần trăm (K %)" },
+  },
+};
+
+const uiSchema = {
+  k_percent: {
+    "ui:required": (formData) => formData.desire !== undefined,
   },
 };
 
@@ -64,6 +70,7 @@ const UserLogin = () => {
     <div className="auth-form-container">
       <Form
         schema={schema}
+        uiSchema={uiSchema}
         validator={validator}
         formData={formData}
         onChange={({ formData }) => setFormData(formData)}
