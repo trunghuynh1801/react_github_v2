@@ -37,7 +37,7 @@ const WarningSquare = () => {
   };
 
   const getSquareContent = () => {
-    return warningData === 1 ? "Rớt Rồi !" : "Đang Bay :)";
+    return warningData === 1 ? "Đã Rơi !" : "Đang Bay :)";
   };
 
   console.log("Current Warning Data:", warningData);
