@@ -7,6 +7,15 @@ const DeleteButton = () => {
 
   const handleDelete = async () => {
     try {
+      // Yêu cầu nhập mã PIN từ người dùng
+      const enteredPIN = prompt("Nhập mã PIN:");
+
+      // Kiểm tra nếu mã PIN không đúng, không thực hiện lệnh delete
+      if (enteredPIN !== "1504") {
+        alert("Mã PIN không đúng. Vui lòng thử lại.");
+        return;
+      }
+
       setIsDeleting(true);
 
       const response = await axios.delete(
@@ -19,14 +28,14 @@ const DeleteButton = () => {
       );
 
       if (response.status === 200) {
-        // Handle success, e.g., show a success message, update state, etc.
+        // Xử lý thành công, ví dụ: hiển thị thông báo thành công, cập nhật trạng thái, v.v.
         console.log("Items deleted successfully");
       } else {
-        // Handle error, e.g., show an error message, log the error, etc.
+        // Xử lý lỗi, ví dụ: hiển thị thông báo lỗi, ghi log lỗi, v.v.
         console.error("Failed to delete items");
       }
     } catch (error) {
-      // Handle any unexpected errors
+      // Xử lý bất kỳ lỗi nào không mong muốn
       console.error("An error occurred while deleting", error);
     } finally {
       setIsDeleting(false);
